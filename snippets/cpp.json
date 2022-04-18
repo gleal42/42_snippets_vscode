@@ -1,0 +1,38 @@
+{
+	"Orthodox Canonical Class form": {
+		"prefix": ["occf", "orthodox canonical", "class can"],
+		"body": [
+			"# include \"${TM_FILENAME_BASE}.hpp\" ",
+			"",
+			"${TM_FILENAME_BASE}::${TM_FILENAME_BASE}()",
+			"{",
+			"\tstd::cout << \"${TM_FILENAME_BASE} Default Constructor\" << std::endl;",
+			"}",
+			"",
+			"${TM_FILENAME_BASE} &${TM_FILENAME_BASE}::operator=(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/})",
+			"{",
+			"\treturn *this;",
+			"}",
+			"",
+			"${TM_FILENAME_BASE}::${TM_FILENAME_BASE}(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/})",
+			"{",
+			"\tstd::cout << \"${TM_FILENAME_BASE} Copy Constructor\" << std::endl;",
+			"\t*this = ${TM_FILENAME_BASE/(.*)/${1:/downcase}/};",
+			"}",
+			"",
+			"${TM_FILENAME_BASE}::~${TM_FILENAME_BASE}()",
+			"{",
+			"\tstd::cout << \"${TM_FILENAME_BASE} Default Destructor\" << std::endl;",
+			"}",
+			"",
+		],
+		"description": "All mandatory functions for Orthodox Canonical Class form",
+	},
+	"include_custom": {
+		"prefix": ["include_custom", "ic"],
+		"body": [
+			"#include \"${TM_FILENAME/c$/h/g}\"",
+		],
+		"description": "Adds an include with the same header file name as your current file (e.g. in ft_test.c: #include \"ft_test.h\""
+	},
+}

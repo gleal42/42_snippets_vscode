@@ -10,5 +10,20 @@
 		"",
 	],
 	"description": "Creates the boiler-plate \"ifndef define endif\" needed for a header file"
-	}
+	},
+	"Orthodox Canonical Class form": {
+		"prefix": ["hoccf", "hclass", "hcanonical"],
+		"body": [
+			"class ${TM_FILENAME_BASE}{",
+			"private:",
+			"\t",
+			"public:",
+			"\t${TM_FILENAME_BASE}();",
+			"\t${TM_FILENAME_BASE} &operator=(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/});",
+			"\t${TM_FILENAME_BASE}(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/});",
+			"\t~${TM_FILENAME_BASE}();",
+			"};",
+		],
+		"description": "All mandatory functions for Orthodox Canonical Class form",
+	},
 }

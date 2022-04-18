@@ -1,0 +1,69 @@
+{
+	"base_makefile": {
+		"prefix": ["splmake", "make", "basemakefile"],
+		"body": [
+			"CXX=c++",
+			"CXXFLAGS= -Wall -Wextra -Werror -std=c++98",
+			"NAME=$1",
+			"SRCS=$2",
+			"all:$(NAME)",
+			"$(NAME): $(SRCS) $(DEPS) Makefile",
+			"\t$(CXX) $(CXXFLAGS) $(SRCS) -o $@",
+			"clean:",
+			"\t$(RM) -r *.o",
+			"fclean: clean",
+			"\t$(RM) $(NAME)",
+			"re: fclean all",
+			"",
+			".PHONY: all clean fclean re",
+		],
+		"description": "Creates a base Makefile and prompts for Srcs files and dependencies"
+	},
+	"mid_file": {
+		"prefix": ["mid_file"],
+		"body": [
+				"${1:file} \\",
+				"$2",
+		],
+		"description": "Prompts for file and goes to line below to continue"
+	},
+	"Dependencies_hpp": {
+		"prefix": ["deps", "dependencies", "header files", "hpp files", "h files"],
+		"body": [
+			"${CLIPBOARD/(SRCS)|(.c)/${1:+DEPS}${2:+.h}/g}",
+		],
+		"description": "Whatever we have in clipboard is pasted but ending in .hpp"
+	},
+	"valgrind": {
+		"prefix": ["vg", "valgrind", "valg"],
+		"body": [
+			"valgrind: vbuild vrun",
+			"",
+			"vbuild: | Dockerfile",
+			"\tdocker build --tag valgrind-image .",
+			"Dockerfile:",
+			"\t@echo \"FROM ubuntu:latest\\n\\nRUN apt-get update\\nRUN apt-get upgrade -y\\nRUN apt-get install make clang gcc valgrind -y\\n\\nWORKDIR /valgrind\" > Dockerfile",
+			"vrun:",
+			"\tdocker run --tty --interactive --rm --volume `pwd`:/valgrind/ --name valgrind valgrind-image",
+			"vcheck:",
+			"\tdocker container ls -a",
+			"\tdocker images",
+			"\tdocker volume ls",
+			"vclean:",
+			"\tdocker system prune -a",
+		],
+		"description": "Creates a base Makefile and prompts for Srcs files and dependencies"
+	},
+}
+
+// valgrind: vbuild vrun
+// vbuild:
+// 	docker build --tag valgrind-image .
+// vrun:
+// 	docker run --tty --interactive --rm --volume `pwd`:/valgrind/ --name valgrind valgrind-image
+// vcheck:
+// 	docker container ls -a
+// 	docker images
+// 	docker volume ls
+// vclean:
+// 	docker system prune -a
