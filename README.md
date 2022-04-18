@@ -1,9 +1,10 @@
 # 42_snippets_vscode
 
-If you use VS Code at 42, this will probably interest you! :fire:<br>
-I had a bit of fun creating custom snippets to improve my workflow at 42 :nerd_face: and wanted to share them with the 42 community! :hugs:<br>
+After [Dimitri](https://github.com/DimitriDaSilva) introduced me to VScode Snippets I've added a few of my own on top of his.
 
-## Setting up the snippets
+My Makefile snippet is also based on [this Valgrind Dockerfile Repository](https://github.com/brhaka/macos-valgrind)
+
+## 1. Setting up the snippets (Dimitri)
 
 You'll simply need to copy the snippet files in your computer. Yes, that's about it. :ok_hand:
 
@@ -18,7 +19,7 @@ To quickly copy these sweet snippets, execute the upload command for your OS:
 - **Mac**: `sh upload_mac.sh`
 - **Linux**: `sh upload_linux.sh`
 
-## Snippets for .c files
+## 2. Snippets for .c files (Dimitri)
  
 ### 42_new_comment
 
@@ -70,7 +71,7 @@ To quickly copy these sweet snippets, execute the upload command for your OS:
 **What it does:** simply adds `#include "libft.h`<br>
 **Prefixes to use it:** `include_libft` or `il`
 
-## Snippets for .h files
+## Snippets for .h files (Dimitri)
  
 ### 42_new_header_file
 
@@ -80,11 +81,28 @@ To quickly copy these sweet snippets, execute the upload command for your OS:
 ![image](https://user-images.githubusercontent.com/66511903/108499317-03dec200-72a6-11eb-9ddc-26e90b8592a4.png)
 <br>
 
-## Resources
+## 3. Resources (Dimitri)
 
 If you want to tweak these snippets to your liking or even create brand new ones, here are ressources to help you! 
 
 - VS Code's own documentation (https://code.visualstudio.com/docs/editor/userdefinedsnippets)
 - A Snippet generator that works for VS Code, Sublime Text and Atom (https://snippet-generator.app/)
 
-Have fun with it!
+## 4. Additional files (Goncalo)
+
+### 4.1. Snippets for .cpp files
+
+#### 4.1.1. Orthodox Canonical Form class (canonical class)
+It creates automatically all the required Orthodox Canonical Form class functions.
+
+### 4.2. Snippets for .hpp files
+
+#### 4.2.1 Orthodox Canonical Form class (hcfc)
+
+It creates automatically all the required Orthodox Canonical Form class functions.
+
+### 4.3. Snippets for Makefile
+
+#### 4.3.1 basic Makefile (make)
+
+#### 4.3.2 valgrind with Dockerfile (valgrind)
