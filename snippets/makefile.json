@@ -2,19 +2,25 @@
 	"base_makefile": {
 		"prefix": ["splmake", "make", "basemakefile"],
 		"body": [
-			"CXX=c++",
-			"CXXFLAGS= -Wall -Wextra -Werror -std=c++98",
-			"NAME=$1",
-			"SRCS=$2",
+			"CXX := c++",
+			"CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -Iinc",
+			"NAME := $1",
+			"SRCS := $2",
+			"INC := $3",
 			"OBJS := $(SRCS:.cpp=.o)",
-			"INC=$3",
-			"all:$(NAME)",
+			"SRCS := $(addprefix srcs/, $(SRCS))",
+			"OBJS := $(addprefix bin/, $(OBJS))",
+			"INC := $(addprefix inc/, $(INC))",
+			"all: $(NAME) | bin",
+			"bin:",
+			"\tmkdir bin",
 			"$(NAME): $(OBJS)",
+			"\t$(CXX) $(CXXFLAGS) $^ -o $@",
 			"$(OBJS): $(SRCS) $(INC) Makefile",
-			"%.o: %.cpp",
-			"\t$(CXX) $(CXXFLAGS) $(SRCS) -o $@",
+			"bin/%.o: srcs/%.cpp",
+			"\t$(CXX) $(CXXFLAGS) $< -c -o $@",
 			"clean:",
-			"\t$(RM) -r *.o",
+			"\t$(RM) bin/*.o",
 			"fclean: clean",
 			"\t$(RM) $(NAME)",
 			"re: fclean all",
@@ -34,7 +40,7 @@
 	"Dependencies_hpp": {
 		"prefix": ["deps", "dependencies", "header files", "hpp files", "h files", "inc", "include"],
 		"body": [
-			"${CLIPBOARD/(SRCS)|(.c)/${1:+DEPS}${2:+.h}/g}",
+			"${CLIPBOARD/(SRCS)|(.c)/${1:+INC}${2:+.h}/g}",
 		],
 		"description": "Whatever we have in clipboard is pasted but ending in .hpp"
 	},
@@ -59,4 +65,3 @@
 		"description": "Creates a base Makefile and prompts for Srcs files and dependencies"
 	},
 }
-
