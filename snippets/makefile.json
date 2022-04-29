@@ -1,4 +1,28 @@
 {
+	"simple_makefile": {
+		"prefix": ["simplemake", "make"],
+		"body": [
+		  "CXX := c++",
+		  "CXXFLAGS := -Wall -Wextra -Werror -std=c++98",
+		  "NAME := $1",
+		  "SRCS := $2 \\",
+		  "INC := $3 \\",
+		  "OBJS := $(SRCS:.cpp=.o)",
+		  "all: $(NAME)",
+		  "$(NAME): $(OBJS)",
+		  "\t$(CXX) $(CXXFLAGS) $(OBJS) -o $@",
+		  "%.o: %.cpp $(INC) Makefile",
+		  "\t$(CXX) $(CXXFLAGS) $< -c -o $@",
+		  "clean:",
+		  "\t$(RM) *.o",
+		  "fclean: clean",
+		  "\t$(RM) $(NAME)",
+		  "re: fclean all",
+		  "",
+		  ".PHONY: all clean fclean re"
+		],
+		"description": "simple_makefile"
+	  },
 	"makefile_dir": {
 		"prefix": ["make_with_dirs", "dirs", "bin", "srcs"],
 		"body": [
@@ -34,34 +58,6 @@
 		],
 		"description": "Creates a base Makefile and prompts for Srcs files and dependencies"
 	},
-	"simple_makefile_mmd": {
-		"prefix": ["mmd", "simplemake"],
-		"body": [
-		  "CXX := c++",
-		  "CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD",
-		  "NAME := $1",
-		  "SRCS := $2 \\",
-		  "INC := $3 \\",
-		  "OBJS := $(SRCS:.cpp=.o)",
-		  "DEPS := $(SRCS:%.c=/%.d)",
-		  "all: $(NAME)",
-		  "$(NAME): $(OBJS) $(INC) Makefile",
-		  "\t$(CXX) $(CXXFLAGS) $(OBJS) -o $@",
-		  "%.o: %.cpp",
-		  "\t$(CXX) $(CXXFLAGS) $< -c -o $@",
-		  "$(DEPS):",
-		  "\tinclude $(SRCS:.c=.d)",
-		  "clean:",
-		  "\t$(RM) *.o",
-		  "\t$(RM) *.d",
-		  "fclean: clean",
-		  "\t$(RM) $(NAME)",
-		  "re: fclean all",
-		  "",
-		  ".PHONY: all clean fclean re"
-		],
-		"description": "simple_makefile_mmd"
-	  },
 	  "Dependencies and Dirs": {
 		"prefix": "mmd_with_dirs_deps",
 		"body": [
@@ -88,10 +84,10 @@
 		  "$(NAME): $(OBJS)",
 		  "\t$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OBJS) -o $@",
 		  "",
-		  "bin/%.o : srcs/%.cpp deps/%.d | $(OBJDIR) $(DEPDIR)",
+		  "bin/%.o : srcs/%.cpp deps/%.d Makefile | $(OBJDIR) $(DEPDIR)",
 		  "\t$(CXX) $(DEPFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<",
 		  "",
-		  "$(DEPS):",
+		  "$(DEPS): Makefile",
 		  "-include $(DEPS)",
 		  "",
 		  "clean:",
@@ -118,10 +114,9 @@
 		  "CXXFLAGS := -Wall -Wextra -Werror -std=c++98",
 		  "NAME := $1",
 		  "SRCS := $2 \\",
-		  "INC := $3 \\",
 		  "OBJS := $(SRCS:.cpp=.o)",
 		  "all: $(NAME)",
-		  "$(NAME): $(OBJS) $(INC) Makefile",
+		  "$(NAME): $(OBJS) Makefile",
 		  "\t$(CXX) $(CXXFLAGS) $(OBJS) -o $@",
 		  "%.o: %.cpp",
 		  "\t$(CXX) $(CXXFLAGS) $< -c -o $@",
@@ -140,14 +135,6 @@
 		],
 		"description": "simple_makefile_mmd"
 	  },
-	"mid_file": {
-		"prefix": ["mid_file"],
-		"body": [
-				"${1:file} \\",
-				"$2",
-		],
-		"description": "Prompts for file and goes to line below to continue"
-	},
 	"valgrind": {
 		"prefix": ["vg", "valgrind", "valg"],
 		"body": [
@@ -167,6 +154,13 @@
 			"\tdocker system prune -a",
 		],
 		"description": "Creates a base Makefile and prompts for Srcs files and dependencies"
+	},
+	"Dependencies_hpp": {
+		"prefix": ["deps", "dependencies", "header files", "hpp files", "h files", "inc", "include"],
+		"body": [
+			"${CLIPBOARD/(SRCS)|(.c)/${1:+INC}${2:+.h}/g}",
+		],
+		"description": "Copy the SRCS and write inc or deps"
 	},
 }
 
