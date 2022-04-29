@@ -14,14 +14,15 @@
 	"Orthodox Canonical Class form": {
 		"prefix": ["hoccf", "hclass", "hcanonical"],
 		"body": [
+			"#include <iostream>",
 			"class ${TM_FILENAME_BASE}{",
 			"private:",
 			"\t",
 			"public:",
 			"\t${TM_FILENAME_BASE}();",
-			"\t${TM_FILENAME_BASE} &operator=(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/});",
 			"\t${TM_FILENAME_BASE}(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/});",
 			"\t~${TM_FILENAME_BASE}();",
+			"\t${TM_FILENAME_BASE} &operator=(const ${TM_FILENAME_BASE} &${TM_FILENAME_BASE/(.*)/${1:/downcase}/});",
 			"};",
 		],
 		"description": "All mandatory functions for Orthodox Canonical Class form",
