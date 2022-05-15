@@ -106,3 +106,14 @@ It creates automatically all the required Orthodox Canonical Form class function
 #### 4.3.1 basic Makefile (make)
 
 #### 4.3.2 valgrind with Dockerfile (valgrind)
+
+
+#### 5. Links
+
+- https://stackoverflow.com/questions/44303316/vscode-defining-own-variables-in-tasks-json
+- if else on vscode snippets https://stackoverflow.com/questions/57381007/vscode-if-else-conditions-in-user-defined-snippet/57383247#57383247
+- https://stackoverflow.com/questions/54526835/vs-code-snippet-placeholder-transform
+- https://code.visualstudio.com/docs/editor/userdefinedsnippets#_grammar
+- https://stackoverflow.com/questions/58192726/can-a-vscode-snippet-make-three-substitutions
+- https://stackoverflow.com/questions/42535652/regex-match-all-the-words-that-contains-some-word
+- https://stackoverflow.com/questions/12666768/how-dot-star-works
